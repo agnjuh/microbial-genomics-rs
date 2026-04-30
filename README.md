@@ -81,9 +81,10 @@ This work explores how Rust can be used to build high-performance tools for:
 - k-mer-based analysis  
 - future extensions such as genome assembly and indexing  
 
-## Future Work
+## Extensions
 
-- Parallel k-mer counting (Rayon)  
-- De Bruijn graph construction  
-- Compression and indexing of k-mer space  
-- Extension to single-cell and metagenomic datasets  
+The current implementation focuses on streaming and k-mer-based summarisation. Natural extensions include:
+
+- parallelisation of k-mer counting to support large-scale datasets  
+- construction of graph-based representations (e.g. de Bruijn graphs)  
+- extension to single-cell and metagenomic sequencing data  
