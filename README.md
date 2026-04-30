@@ -7,6 +7,8 @@ This repository implements a Rust-based approach for processing microbial sequen
 
 The work is motivated by challenges in large-scale microbial genomics and emerging single-cell sequencing approaches, where data volumes are substantial and computational efficiency becomes critical.
 
+This implementation demonstrates how k-mer-based representations can capture both sequence composition and structured patterns in microbial sequencing data.
+
 ## Features
 
 - Streaming FASTQ processing (memory-efficient)
@@ -15,7 +17,9 @@ The work is motivated by challenges in large-scale microbial genomics and emergi
 - Identification of overrepresented k-mers
 - Detection of low-complexity sequence patterns (e.g. homopolymers)
 - JSON report generation for downstream analysis
+- CSV export of top k-mers with normalized frequency
 - Chunk-based parallel k-mer counting using Rayon
+- De Bruijn graph summary derived from k-mer transitions
 - Snakemake workflow integration
 
 ## Dataset
@@ -40,7 +44,7 @@ gunzip -c data/raw/ecoli_R1.fastq.gz | head -n 400000 > data/subset/ecoli_100k_R
 ### Run the Rust tool
 
 ```bash
-cargo run --release -- data/subset/ecoli_100k_R1.fastq 11 results/ecoli_k11_report.json
+cargo run --release -- data/subset/ecoli_100k_R1.fastq 11 results/ecoli_k11_report.json results/top_kmers_k11.csv
 ```
 
 ### Run via Snakemake
@@ -49,28 +53,34 @@ snakemake -s workflow/Snakefile --cores 1
 
 ## Output
 
-The tool produces a JSON report containing:
+The workflow produces:
 
-- Number of reads  
-- GC content  
-- Number of unique k-mers  
-- Top k-mers with low-complexity annotation  
+- JSON report containing:
+  - number of reads  
+  - GC content  
+  - number of unique k-mers  
+  - top k-mers with low-complexity annotation  
+  - De Bruijn graph summary (node count, weighted edge count, average out-degree)  
+
+- CSV table:
+  - `results/top_kmers_k11.csv`  
+  - contains k-mer, count, normalized frequency, and low-complexity flag  
+
+## Example Visualization
+
+Top k-mer frequencies (k = 11):
+
+![Top k-mer frequencies](results/top_kmers_k11.png)
 
 ## Data Interpretation
 
-The observed GC content (~0.50) is consistent with bacterial genomes such as *E. coli*.
+The observed GC content is consistent with bacterial genomes such as *E. coli*.
 
-For small k (k = 5, 7), the k-mer space is saturated (all possible k-mers are observed), reflecting the diversity and coverage of the dataset. At k = 11, only a subset of all possible k-mers is present, providing a more informative representation of sequence structure.
+Highly abundant k-mers may include homopolymeric sequences, which are flagged as low-complexity and can reflect sequencing bias or low-complexity genomic regions.
 
-Highly abundant k-mers include homopolymeric sequences (e.g. "AAAAAAAAAAA"), which are flagged as low-complexity. These may arise from sequencing artefacts, low-complexity regions, or technical biases.
+Other high-frequency k-mers form overlapping sequence patterns (e.g. CTGTCTCTTAT → TGTCTCTTATA), indicating that they originate from highly represented genomic regions. This demonstrates that k-mer frequency profiles capture structured sequence signals.
 
-Other frequent k-mers form overlapping sequence patterns (e.g. CTGTCTCTTAT → TGTCTCTTATA), indicating that they originate from highly represented genomic regions.
-
-This illustrates how k-mer profiles can be used to:
-
-- identify sequence biases and artefacts  
-- detect repetitive or overrepresented sequence motifs  
-- provide a basis for graph-based genome reconstruction (e.g. de Bruijn graphs)  
+The graph summary represents k-mers as directed transitions between (k−1)-mers. Edge counts are weighted by k-mer abundance, reflecting the total number of observed transitions rather than only unique graph edges.
 
 ## Motivation
 
@@ -80,13 +90,12 @@ This work explores how Rust can be used to build high-performance tools for:
 
 - sequence processing  
 - k-mer-based analysis  
-- future extensions such as genome assembly and indexing  
+- scalable bioinformatics workflows  
 
 ## Extensions
 
-The current implementation focuses on streaming FASTQ processing, k-mer-based summarisation, and parallel execution. Natural extensions include:
+The current implementation focuses on streaming FASTQ processing, k-mer-based summarisation, parallel execution, and graph-based summarisation.
 
-- construction of graph-based representations (e.g. de Bruijn graphs)  
+- construction of full graph representations (e.g. explicit de Bruijn graph structures)  
 - compression and indexing of k-mer space  
 - extension to single-cell and metagenomic sequencing data  
-
