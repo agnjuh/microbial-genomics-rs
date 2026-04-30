@@ -66,13 +66,13 @@ The workflow produces:
   - `results/top_kmers_k11.csv`  
   - contains k-mer, count, normalized frequency, and low-complexity flag  
 
-## Example Visualization
+## Visualization
 
 Top k-mer frequencies (k = 11):
 
 ![Top k-mer frequencies](results/top_kmers_k11.png)
 
-## Data Interpretation
+## Data interpretation
 
 The observed GC content is consistent with bacterial genomes such as *E. coli*.
 
