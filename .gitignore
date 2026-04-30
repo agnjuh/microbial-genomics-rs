@@ -1,4 +1,8 @@
-/target
+.DS_Store
+**/.DS_Store
+.snakemake/
+target/
 data/raw/
+data/subset/
 *.fastq
 *.fastq.gz

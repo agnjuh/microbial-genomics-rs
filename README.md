@@ -15,6 +15,7 @@ The work is motivated by challenges in large-scale microbial genomics and emergi
 - Identification of overrepresented k-mers
 - Detection of low-complexity sequence patterns (e.g. homopolymers)
 - JSON report generation for downstream analysis
+- Chunk-based parallel k-mer counting using Rayon
 - Snakemake workflow integration
 
 ## Dataset
@@ -83,8 +84,9 @@ This work explores how Rust can be used to build high-performance tools for:
 
 ## Extensions
 
-The current implementation focuses on streaming and k-mer-based summarisation. Natural extensions include:
+The current implementation focuses on streaming FASTQ processing, k-mer-based summarisation, and parallel execution. Natural extensions include:
 
-- parallelisation of k-mer counting to support large-scale datasets  
 - construction of graph-based representations (e.g. de Bruijn graphs)  
+- compression and indexing of k-mer space  
 - extension to single-cell and metagenomic sequencing data  
+

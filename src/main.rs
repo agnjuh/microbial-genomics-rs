@@ -6,6 +6,7 @@ use std::io::Write;
 mod complexity;
 mod fastq;
 mod kmer;
+mod parallel;
 
 #[derive(Serialize)]
 struct KmerRecord {
