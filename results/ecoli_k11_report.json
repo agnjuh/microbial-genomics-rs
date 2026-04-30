@@ -1,0 +1,59 @@
+{
+  "input_file": "data/subset/ecoli_100k_R1.fastq",
+  "reads": 100000,
+  "gc_content": 0.504305,
+  "k": 11,
+  "unique_kmers": 2831955,
+  "top_kmers": [
+    {
+      "kmer": "AAAAAAAAAAA",
+      "count": 16339,
+      "low_complexity": true
+    },
+    {
+      "kmer": "CTGTCTCTTAT",
+      "count": 14964,
+      "low_complexity": false
+    },
+    {
+      "kmer": "TGTCTCTTATA",
+      "count": 14839,
+      "low_complexity": false
+    },
+    {
+      "kmer": "GTCTCTTATAC",
+      "count": 14682,
+      "low_complexity": false
+    },
+    {
+      "kmer": "TCTCTTATACA",
+      "count": 14547,
+      "low_complexity": false
+    },
+    {
+      "kmer": "CTCTTATACAC",
+      "count": 14418,
+      "low_complexity": false
+    },
+    {
+      "kmer": "TCTTATACACA",
+      "count": 14271,
+      "low_complexity": false
+    },
+    {
+      "kmer": "CTTATACACAT",
+      "count": 14123,
+      "low_complexity": false
+    },
+    {
+      "kmer": "TTATACACATC",
+      "count": 13976,
+      "low_complexity": false
+    },
+    {
+      "kmer": "TATACACATCT",
+      "count": 13803,
+      "low_complexity": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+Assuming unrestricted shared filesystem usage.
+host: Agnes
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+rust_kmer_report        1
+total                   1
+
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Apr 30 08:52:35 2026]
+localrule rust_kmer_report:
+    input: data/subset/ecoli_100k_R1.fastq
+    output: results/ecoli_k11_report.json
+    jobid: 0
+    reason: Forced execution
+    resources: tmpdir=/var/folders/7r/plw5qn4j7xl0z2_tlbnlls7m0000gn/T
+[Thu Apr 30 08:52:50 2026]
+Finished jobid: 0 (Rule: rust_kmer_report)
+1 of 1 steps (100%) done
+Complete log(s): /Users/agnesjuhasz/Documents/microbial-genomics-rs/.snakemake/log/2026-04-30T085235.369650.snakemake.log

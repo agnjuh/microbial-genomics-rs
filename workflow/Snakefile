@@ -1,0 +1,13 @@
+rule all:
+    input:
+        "results/ecoli_k11_report.json"
+
+rule rust_kmer_report:
+    input:
+        fastq="data/subset/ecoli_100k_R1.fastq"
+    output:
+        json="results/ecoli_k11_report.json"
+    params:
+        k=11
+    shell:
+        "cargo run --release -- {input.fastq} {params.k} {output.json}"
